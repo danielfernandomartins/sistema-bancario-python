@@ -1,132 +1,154 @@
-# 🏦 DIO Bank - Sistema Bancário em Python
+# 🏦 Sistema Bancário em Python (Procedural & POO)
 
 [![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
-[![Platform](https://img.shields.io/badge/Plataforma-DIO-orange.svg)](https://dio.me)
-[![Status](https://img.shields.io/badge/Status-Conclu%C3%ADdo-brightgreen.svg)]()
-[![License](https://img.shields.io/badge/License-MIT-green.svg)]()
+[![Tests](https://img.shields.io/badge/Tests-Passing-success.svg?logo=pytest&logoColor=white)]()
+[![Paradigm](https://img.shields.io/badge/Paradigm-Procedural%20%7C%20OOP-orange.svg)]()
+[![Platform](https://img.shields.io/badge/Plataforma-DIO-red.svg)](https://dio.me)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> Projeto prático desenvolvido durante a formação de tecnologia da [DIO (Digital Innovation One)](https://dio.me), com foco em lógica de programação, estruturas condicionais, laços de repetição e boas práticas com Python.
-
----
-
-## 📌 Visão Geral
-
-Este projeto simula o funcionamento das operações essenciais de um caixa eletrônico / sistema bancário. O objetivo principal foi criar uma solução robusta em linha de comando (CLI), aplicando validações estritas de regras de negócio financeiras e fornecendo uma experiência amigável e segura para o usuário.
+> Simulação robusta de operações bancárias (Depósito, Saque, Extrato, Cadastro de Clientes e Múltiplas Contas Correntes), implementada em duas abordagens arquiteturais: **Procedural (v1)** e **Orientada a Objetos com Clean Design & Testes Automatizados (v2)**.
 
 ---
 
-## ⚙️ Regras de Negócio e Funcionalidades
+## 🎯 Arquiteturas Implementadas
 
-O sistema conta com um menu interativo contínuo contendo as seguintes operações:
+### 🔹 1. Versão Procedural (`sistema_bancario.py`)
+Focada em lógica algorítmica essencial, tratamento defensivo de entrada do usuário com `try/except ValueError`, estruturas condicionais e controle de fluxo interativo via terminal.
 
-### 1. 💵 Depósito
-- Aceita apenas valores numéricos estritamente positivos.
-- Atualiza o saldo em tempo real.
-- Todas as transações são registradas no histórico do extrato com data e formatação monetária.
-
-### 2. 💸 Saque
-Possui uma camada tripla de validações de segurança:
-1. **Verificação de Saldo:** Impede saques superiores ao saldo disponível em conta.
-2. **Limite por Transação:** Limite máximo de **R$ 500,00** por operação de saque.
-3. **Limite Diário:** Permite no máximo **3 saques diários**.
-- Notifica o usuário sobre a quantidade de saques restantes no dia.
-
-### 3. 📄 Extrato
-- Exibe a listagem completa de todas as entradas e saídas formatadas em padrão monetário (`R$ XXX.XX`).
-- Caso nenhuma movimentação tenha sido realizada, exibe a mensagem amigável: *"Não foram realizadas movimentações."*
-- Apresenta o saldo consolidado ao final da consulta.
-
-### 4. 🚪 Sair
-- Encerra a aplicação de forma limpa.
+### 🔹 2. Versão Orientada a Objetos (`sistema_bancario_poo.py`)
+Implementa um modelo corporativo inspirado em Clean Code e Domain-Driven Design:
+- **Classes Abstratas & Polimorfismo:** `Transacao` (ABC) com implementações concretas `Deposito` e `Saque`.
+- **Encapsulamento & Propriedades:** Proteção de dados sensíveis (`_saldo`, `_transacoes`, `_cliente`) através de `@property`.
+- **Relacionamentos:**
+  - `Cliente` (1) ── (N) `Conta`
+  - `PessoaFisica` herda de `Cliente`
+  - `ContaCorrente` herda de `Conta` com regras adicionais de limite por transação e teto de saques diários.
+  - `Historico` desacoplado que audita cada transação com timestamp e tipo.
 
 ---
 
-## 🛠️ Tecnologias e Conceitos Aplicados
+## 🔄 Diagrama de Classes (POO)
 
-- **Linguagem:** Python 3
-- **Estruturas de Controle de Fluxo:** `if`, `elif`, `else` para validações lógicas.
-- **Laços de Repetição:** `while True` com controle de parada (`break`).
-- **Tratamento de Exceções:** Blocos `try / except ValueError` para prevenir travamentos caso o usuário digite caracteres inválidos no lugar de números.
-- **Formatação de Dados:** *f-strings* com alinhamento e precisão decimal de duas casas (`:.2f`).
-- **Boas Práticas:** Código legível, nomes de variáveis expressivos e aderência aos padrões da **PEP 8**.
+```mermaid
+classDiagram
+    class Transacao {
+        <<interface>>
+        +valor: float
+        +registrar(conta: Conta): bool
+    }
 
----
+    class Deposito {
+        -valor: float
+        -data_hora: datetime
+        +registrar(conta: Conta): bool
+    }
 
-## 🖥️ Demonstração de Uso
+    class Saque {
+        -valor: float
+        -data_hora: datetime
+        +registrar(conta: Conta): bool
+    }
 
-```text
-========================================
-             DIO BANK - MENU            
-========================================
-[d] Depositar
-[s] Sacar
-[e] Extrato
-[q] Sair
-========================================
-=> Escolha uma operacao: d
+    class Historico {
+        -transacoes: List~Transacao~
+        +adicionar_transacao(transacao: Transacao): void
+        +gerar_relatorio(): str
+    }
 
---- OPERACAO DE DEPOSITO ---
-Informe o valor a depositar: R$ 1000.00
-[+] Deposito de R$ 1000.00 realizado com sucesso!
+    class Conta {
+        -saldo: float
+        -numero: int
+        -agencia: str
+        -cliente: Cliente
+        -historico: Historico
+        +sacar(valor: float): bool
+        +depositar(valor: float): bool
+    }
 
-=> Escolha uma operacao: s
+    class ContaCorrente {
+        -limite: float
+        -limite_saques: int
+        +sacar(valor: float): bool
+    }
 
---- OPERACAO DE SAQUE ---
-Informe o valor a sacar: R$ 200.00
-[+] Saque de R$ 200.00 realizado com sucesso! (Saques restantes hoje: 2)
+    class Cliente {
+        -endereco: str
+        -contas: List~Conta~
+        +adicionar_conta(conta: Conta): void
+        +realizar_transacao(conta: Conta, transacao: Transacao): bool
+    }
 
-=> Escolha uma operacao: e
+    class PessoaFisica {
+        -cpf: str
+        -nome: str
+        -data_nascimento: str
+    }
 
-================ EXTRATO ================
-Deposito: R$    1000.00
-Saque:    R$     200.00
-
-Saldo atual: R$ 800.00
-=========================================
+    Transacao <|.. Deposito
+    Transacao <|.. Saque
+    Conta <|-- ContaCorrente
+    Cliente <|-- PessoaFisica
+    Conta "1" *-- "1" Historico
+    Cliente "1" o-- "*" Conta
 ```
 
 ---
 
-## 🚀 Como Executar o Projeto Localmente
+## ⚙️ Regras de Negócio e Validações
 
-### Pré-requisitos
-- Ter o **Python 3** instalado em sua máquina.
-- Ter o **Git** instalado.
-
-### Passo a Passo
-
-1. **Clone o repositório:**
-   ```bash
-   git clone https://github.com/danielfernandomartins/sistema-bancario-python.git
-   ```
-
-2. **Acesse a pasta do projeto:**
-   ```bash
-   cd sistema-bancario-python
-   ```
-
-3. **Execute o script:**
-   ```bash
-   python sistema_bancario.py
-   ```
+- **Depósito:** Requer montantes estritamente positivos (`> 0`).
+- **Saque:** 
+  1. Validação de saldo disponível em conta (não permite saldo negativo).
+  2. Validação do limite financeiro por transação (padrão: `R$ 500,00`).
+  3. Validação do teto máximo de saques diários (padrão: `3 saques/dia`).
+- **Extrato Auditado:** Geração de extrato detalhado com tipagem de operação e saldo final consolidado.
 
 ---
 
-## 📈 Próximas Evoluções (Roadmap)
+## 🧪 Testes Automatizados
 
-Conforme a evolução na trilha de aprendizado da DIO:
-- [ ] **Fase 2:** Modularização do sistema com funções (`def`), separando regras de saque, depósito e extrato.
-- [ ] **Fase 3:** Refatoração completa utilizando **Programação Orientada a Objetos (POO)** com classes para Cliente, Conta Corrente e Histórico.
-- [ ] **Fase 4:** Persistência em banco de dados relacional (SQLite / PostgreSQL).
+O projeto conta com suíte de testes unitários automatizados validando todas as regras críticas:
+
+```bash
+python -m unittest test_sistema_bancario.py
+```
+
+Cenários cobertos:
+- ✅ Depósito com sucesso e atualização de saldo/histórico
+- 🚫 Depósito de valores negativos ou zerados bloqueado
+- ✅ Saque com sucesso deduzindo do saldo
+- 🚫 Bloqueio de saque superior ao saldo disponível
+- 🚫 Bloqueio de saque com valor acima do limite por operação
+- 🚫 Bloqueio após atingir o limite diário de operações
+
+---
+
+## 🚀 Como Executar
+
+### Pré-requisitos
+- Python 3.10 ou superior.
+
+### Executando a versão POO (Recomendada):
+```bash
+python sistema_bancario_poo.py
+```
+
+### Executando a versão Procedural:
+```bash
+python sistema_bancario.py
+```
 
 ---
 
 ## 👨‍💻 Autor
 
 Desenvolvido por **Daniel Fernando Martins**  
-- **E-mail:** [dfernandom@outlook.com](mailto:dfernandom@outlook.com)  
+- **LinkedIn:** [linkedin.com/in/danielfernandomartins](https://www.linkedin.com/in/danielfernandomartins)  
 - **GitHub:** [@danielfernandomartins](https://github.com/danielfernandomartins)  
-- **Perfil DIO:** Estudante em formação na DIO
+- **Email:** [dfernandom@outlook.com](mailto:dfernandom@outlook.com)  
 
 ---
-*Gostou do projeto? Deixe uma ⭐️ no repositório!*
+
+## 📄 Licença
+
+Distribuído sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) para detalhes.
