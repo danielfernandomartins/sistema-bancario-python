@@ -97,7 +97,7 @@ Saldo atual: R$ 800.00
 
 1. **Clone o repositório:**
    ```bash
-   git clone https://github.com/SEU_USUARIO/sistema-bancario-python.git
+   git clone https://github.com/danielfernandomartins/sistema-bancario-python.git
    ```
 
 2. **Acesse a pasta do projeto:**
@@ -125,7 +125,7 @@ Conforme a evolução na trilha de aprendizado da DIO:
 
 Desenvolvido por **Daniel Fernando Martins**  
 - **E-mail:** [dfernandom@outlook.com](mailto:dfernandom@outlook.com)  
-- **GitHub:** [@dfernandom](https://github.com/dfernandom)  
+- **GitHub:** [@danielfernandomartins](https://github.com/danielfernandomartins)  
 - **Perfil DIO:** Estudante em formação na DIO
 
 ---
