@@ -6,7 +6,13 @@
 [![Platform](https://img.shields.io/badge/Plataforma-DIO-red.svg)](https://dio.me)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> Simulação robusta de operações bancárias (Depósito, Saque, Extrato, Cadastro de Clientes e Múltiplas Contas Correntes), implementada em duas abordagens arquiteturais: **Procedural (v1)** e **Orientada a Objetos com Clean Design & Testes Automatizados (v2)**.
+> Projeto de simulação de operações bancárias — depósito, saque, extrato, cadastro de clientes e contas — desenvolvido em duas abordagens: **procedural** e **orientada a objetos**. O objetivo é demonstrar evolução de lógica, modelagem de domínio, validações e testes em um contexto financeiro.
+
+---
+
+## 💼 Contexto de negócio
+
+O sistema modela regras comuns de uma conta corrente, como limite por saque, quantidade máxima de saques e histórico de movimentações. Esse contexto permite demonstrar como requisitos financeiros podem ser convertidos em regras de software verificáveis.
 
 ---
 
@@ -16,7 +22,7 @@
 Focada em lógica algorítmica essencial, tratamento defensivo de entrada do usuário com `try/except ValueError`, estruturas condicionais e controle de fluxo interativo via terminal.
 
 ### 🔹 2. Versão Orientada a Objetos (`sistema_bancario_poo.py`)
-Implementa um modelo corporativo inspirado em Clean Code e Domain-Driven Design:
+Implementa um modelo orientado a objetos com separação de responsabilidades:
 - **Classes Abstratas & Polimorfismo:** `Transacao` (ABC) com implementações concretas `Deposito` e `Saque`.
 - **Encapsulamento & Propriedades:** Proteção de dados sensíveis (`_saldo`, `_transacoes`, `_cliente`) através de `@property`.
 - **Relacionamentos:**
