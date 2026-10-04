@@ -111,6 +111,26 @@ classDiagram
 
 ---
 
+## 🛠️ Visão para Suporte e Operações de TI
+
+Este projeto ajuda a exercitar investigação de comportamentos incorretos em sistemas com regras claras.
+
+### Exemplos de diagnóstico
+
+- Saque recusado por saldo insuficiente
+- Operação bloqueada por limite
+- Quantidade máxima de saques atingida
+- Dado inválido informado pelo usuário
+- Divergência entre saldo e histórico
+
+A abordagem é separar **regra de negócio**, **entrada do usuário** e **defeito do sistema** antes de classificar uma ocorrência.
+
+## Como explicar em entrevista
+
+> "Esse projeto me ajuda muito a explicar troubleshooting. Quando uma operação falha, eu não parto do princípio de que é erro do sistema. Primeiro verifico entrada, regra, estado da conta e histórico. Essa forma estruturada de investigar é exatamente o que quero aplicar em suporte e operações de TI."
+
+---
+
 ## 🧪 Testes Automatizados
 
 O projeto conta com suíte de testes unitários automatizados validando todas as regras críticas:
