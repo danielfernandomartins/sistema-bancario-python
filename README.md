@@ -160,6 +160,12 @@ Isso também deixa claros os próximos passos técnicos, sem adicionar complexid
 - logs e auditoria estruturada;
 - tratamento de concorrência em movimentações.
 
+## Estudos de caso de análise de negócios
+
+O repositório também reúne três estudos de portfólio com requisitos, regras, SQL, dados fictícios e medidas de Power BI: [Investimentos no app](business-cases/01-investimentos-app/README.md), [Alertas de cobrança](business-cases/02-alertas-cobranca/README.md) e [Rotina de financiamento de veículos](business-cases/03-financiamento-veiculos/README.md). [Índice dos casos](business-cases/README.md).
+
+Os estudos são identificados como projetos independentes de portfólio; não representam sistemas, políticas ou trabalho realizado no Bradesco ou em outra instituição.
+
 ## Perguntas que este projeto permite discutir em entrevista
 
 - Como você separaria regra de negócio de interface de usuário?
