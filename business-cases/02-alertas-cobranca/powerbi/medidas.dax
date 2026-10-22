@@ -1,0 +1,8 @@
+-- Importar o CSV e renomear a tabela para Cobranca.
+Saldo vencido elegível = SUMX(FILTER(Cobranca, Cobranca[status] = "ABERTO" && Cobranca[contestado] = FALSE() && Cobranca[vencimento] < Cobranca[data_ref]), Cobranca[valor_devido] - Cobranca[valor_pago_alocado])
+
+Contratos na fila = CALCULATE(DISTINCTCOUNT(Cobranca[contrato_id]), Cobranca[status] = "ABERTO", Cobranca[contestado] = FALSE())
+
+Pagamentos alocados = SUM(Cobranca[valor_pago_alocado])
+
+Taxa alocada sobre devido = DIVIDE([Pagamentos alocados], SUM(Cobranca[valor_devido]))
