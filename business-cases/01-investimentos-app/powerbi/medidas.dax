@@ -1,0 +1,8 @@
+-- Importar o CSV e renomear a tabela para Investimentos.
+Clientes com oferta = CALCULATE(DISTINCTCOUNT(Investimentos[cliente_id]), Investimentos[oferta_exibida] = TRUE())
+
+Ofertas aceitas = CALCULATE(COUNTROWS(Investimentos), Investimentos[oferta_aceita] = TRUE())
+
+Taxa de aceite = DIVIDE([Ofertas aceitas], CALCULATE(COUNTROWS(Investimentos), Investimentos[oferta_exibida] = TRUE()))
+
+Saldo potencial elegível = SUMX(FILTER(Investimentos, Investimentos[suitability_validada] = TRUE() && Investimentos[consentimento_contato] = TRUE()), MAX(0, Investimentos[saldo_medio_30d] - Investimentos[saldo_minimo_30d] - 500))
