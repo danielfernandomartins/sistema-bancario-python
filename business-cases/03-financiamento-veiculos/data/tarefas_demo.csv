@@ -1,0 +1,11 @@
+data_ref,contrato_id,tarefa_id,tipo_tarefa,etapa,status,responsavel_area,criada_em,prazo_em,concluida_em,bloqueio_motivo,retrabalho
+2026-09-30,V001,T001,Conferir_documentos,Entrada,CONCLUIDA,Operacoes,2026-09-01,2026-09-02,2026-09-01,,false
+2026-09-30,V001,T002,Validar_veiculo,Validacao,CONCLUIDA,Operacoes,2026-09-02,2026-09-04,2026-09-05,,true
+2026-09-30,V002,T003,Conferir_documentos,Entrada,ABERTA,Operacoes,2026-09-28,2026-09-29,,,false
+2026-09-30,V002,T004,Preparar_contrato,Formalizacao,BLOQUEADA,Formalizacao,2026-09-27,2026-09-30,,Documento_pendente,false
+2026-09-30,V003,T005,Validar_veiculo,Validacao,EM_ANDAMENTO,Operacoes,2026-09-29,2026-10-01,,,false
+2026-09-30,V004,T006,Acompanhar_assinatura,Assinatura,CONCLUIDA,Formalizacao,2026-09-10,2026-09-12,2026-09-12,,false
+2026-09-30,V005,T007,Confirmar_correcao,Pendencia,ABERTA,Loja,2026-09-25,2026-09-27,,,false
+2026-09-30,V006,T008,Conferir_documentos,Entrada,CONCLUIDA,Operacoes,2026-09-15,2026-09-17,2026-09-16,,false
+2026-09-30,V007,T009,Preparar_contrato,Formalizacao,CONCLUIDA,Formalizacao,2026-09-20,2026-09-22,2026-09-21,,false
+2026-09-30,V008,T010,Validar_veiculo,Validacao,BLOQUEADA,Operacoes,2026-09-28,2026-09-30,,Divergencia_dado,false
