@@ -1,0 +1,11 @@
+data_ref,cliente_id,segmento,saldo_medio_30d,saldo_minimo_30d,valor_aplicado,oferta_exibida,oferta_aceita,suitability_validada,consentimento_contato
+2026-09-30,C001,Varejo,2800.00,900.00,1000.00,true,true,true,true
+2026-09-30,C002,Varejo,1200.00,500.00,0.00,true,false,true,true
+2026-09-30,C003,Prime,7800.00,4100.00,2000.00,true,true,true,true
+2026-09-30,C004,Varejo,900.00,700.00,0.00,false,false,true,true
+2026-09-30,C005,Prime,4500.00,3000.00,0.00,false,false,false,true
+2026-09-30,C006,Varejo,2500.00,1800.00,0.00,false,false,true,false
+2026-09-30,C007,Prime,6200.00,1500.00,5000.00,true,true,true,true
+2026-09-30,C008,Varejo,1600.00,1450.00,0.00,false,false,true,true
+2026-09-30,C009,Prime,3900.00,900.00,1500.00,true,false,true,true
+2026-09-30,C010,Varejo,3100.00,800.00,1000.00,true,true,true,true
