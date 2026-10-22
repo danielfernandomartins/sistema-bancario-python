@@ -1,0 +1,12 @@
+-- Importar o CSV e renomear a tabela para TarefasFinanciamento.
+Tarefas abertas vencidas = CALCULATE(COUNTROWS(TarefasFinanciamento), TarefasFinanciamento[status] <> "CONCLUIDA", TarefasFinanciamento[prazo_em] < TarefasFinanciamento[data_ref])
+
+Tarefas concluídas = CALCULATE(COUNTROWS(TarefasFinanciamento), TarefasFinanciamento[status] = "CONCLUIDA")
+
+Concluídas no prazo = CALCULATE(COUNTROWS(TarefasFinanciamento), TarefasFinanciamento[status] = "CONCLUIDA", TarefasFinanciamento[concluida_em] <= TarefasFinanciamento[prazo_em])
+
+SLA de conclusão = DIVIDE([Concluídas no prazo], [Tarefas concluídas])
+
+Tarefas com retrabalho = CALCULATE(COUNTROWS(TarefasFinanciamento), TarefasFinanciamento[retrabalho] = TRUE())
+
+Taxa de retrabalho = DIVIDE([Tarefas com retrabalho], [Tarefas concluídas])
